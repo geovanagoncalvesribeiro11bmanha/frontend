@@ -1,0 +1,33 @@
+function init(){
+    const navUl = document.querySelector("nav ul")
+
+    const user = JSON.parse(sessionStorage.getItem("user"))
+
+    if(user){
+        navUl.innerHTML += `
+        <li>
+            <a href = "./pages/jogar.html">Jogar</a>
+        </li>
+        <li><h2>Usuário: ${user.name}</h2></li>
+        <li><button id = "logout">Sair</button></li>
+        
+        `
+
+        const logoutButton = document.querySelector("#logout")
+        logoutButton.addEventListener("click", logout)
+        return
+    }
+
+    navUl.innerHTML += `
+    <li>
+        <a href="./pages/login.html">Login</a>
+    </li>
+    `
+}
+
+function logout(){
+    sessionStorage.removeItem("user")
+    window.location.reload()
+}
+
+init()
